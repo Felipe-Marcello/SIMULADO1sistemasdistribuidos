@@ -1,1 +1,35 @@
+1: C) ao cliente e ao servidor.
+2: A) a dependência de um único serviço, que constitui um ponto único de falha.
+3: E) o número da porta utilizada pelo serviço.
+4: B) TCP, porque oferece comunicação orientada à conexão e entrega ordenada.
+5: D) Usar UDP e tratar na aplicação as perdas que forem relevantes.
+6: C) iniciar o servidor na porta esperada e depois executar o cliente.
+7: A) O servidor aguarda a conexão, recebe a solicitação, processa os dados e envia a resposta.
+8: E) o envio por UDP, por si só, não garante que o datagrama chegue nem que haja resposta.
+9: B) Acordar e documentar o formato da mensagem entre as duas equipes.
+10: D) oferece ao cliente uma forma de invocar operações remotas semelhante à chamada de métodos.
+11: C) O cliente solicitou a operação e o servidor a executou antes de devolver o resultado.
+12: A) A chamada depende da rede e do servidor; o cliente deve considerar atrasos e indisponibilidade.
+13: E) a função foi registrada como operação do servidor e o processo foi reiniciado após a mudança.
+14: B) serialização dos dados.
+15: D) indicar no cliente o endereço alcançável da máquina que executa o servidor e a porta do serviço.
+16: C) o cliente recebe a escolha do usuário e solicita ao servidor a execução da operação.
+17: A) A aparência de uma chamada de função não elimina a dependência do serviço remoto.
+18: E) A chamada remota envolve comunicação e pode ser afetada por falhas ou atrasos fora do processo cliente.
 
+19:Investigar a infraestrutura primeiro evita desperdício de tempo alterando códigos que já estão funcionando. 
+Se o problema for de comunicação como um pacote que não chega ou uma resposta que bloqueia no caminho, mexer na lógica interna do cálculo não vai adiantar nada.
+Status do servidor: Garanta que o processo do servidor está ativo e rodando no sistema.
+Porta de rede: Confirme se o serviço está associado à porta correta e escutando conexões.
+Conectividade: Faça teste rápido (ping) para ver se o cliente alcança o IP do servidor através da rede e dos firewalls.
+Troca de mensagens: Olhe os logs ou use o Wireshark para checar se as requisições estão sumindo no caminho ou chegando até a interface.
+
+20:A RPC simplifica o desenvolvimento ao fazer uma chamada de função em outro servidor parecer uma função local. 
+Ela remove toda a dor de cabeça de gerenciar sockets, abrir conexões TCP/UDP no braço e converter manualmente fluxos de bytes e tipos de dados.
+Chamada local: O cliente aciona a função normalmente.
+Stub do cliente: Intercepta os parâmetros e faz a serialização (marshalling).
+Rede: Os dados viajam pelo protocolo de transporte.
+Skeleton do servidor: Recebe os pacotes, faz a desserialização (unmarshalling) e roda a função real.
+Retorno: O resultado faz exatamente o caminho inverso até o cliente.
+Definição de Timeouts: Impedir que o cliente fique travado indefinidamente esperando por uma resposta de um servidor que caiu.
+Tratamento de Exceções de Rede: Implementar políticas de tolerância a falhas na aplicação (como reatentativas/idempotência ou estratégias de fallback) para lidar com oscilações temporárias na rede.
